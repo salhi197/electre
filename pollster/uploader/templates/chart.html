@@ -1,0 +1,316 @@
+ <!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        /* layout.css Style */
+      .upload-drop-zone {
+      height: 200px;
+      border-width: 2px;
+      margin-bottom: 20px;
+      }
+
+      /* skin.css Style*/
+      .upload-drop-zone {
+      color: #ccc;
+      border-style: dashed;
+      border-color: #ccc;
+      line-height: 200px;
+      text-align: center
+          }
+      .upload-drop-zone.drop {
+      color: #222;
+      border-color: #222;
+      }
+    </style>
+    <title>P.C.A - Kmeans</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <br>
+      <div class="page-header">
+        <a href="/" class="btn btn-primary">New file</a>
+      </div>
+      <div class="row grid-divider">
+      <div class="col-sm-6">
+        <div class="col-padding">
+          <h3>Graphe de Composante principal : </h3>
+          <canvas id="BarChart" width="600" height="400"></canvas>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="col-padding">
+          <h3>Graphe cumulé :</h3>
+          <canvas id="cumule" width="600" height="400"></canvas>
+        </div>      
+      </div>
+
+      <div class="col-sm-12" >
+        <div class="col-padding">
+          <h3>Graphe de la methode Elbow : </h3>
+          <canvas id="chartJSContainer" width="600" height="400"></canvas>
+        </div>
+      </div>
+
+
+      <div class="col-sm-12">
+        <div class="col-padding">
+          <h3>Graphe du Kmeans :</h3>
+          <canvas id="bubbleChart" width="600" height="400"></canvas>
+        </div>
+
+      
+      </div>
+      <input type="hidden" name="data" id="data" value="{{x_pca}}">
+      <input type="hidden" name="data" id="pca_explained_variance_ratio_" value="{{pca_explained_variance_ratio_}}">
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script src="http://harthur.github.io/clusterfck/demos/colors/clusterfck.js"></script>
+
+<script>
+
+let label_cumle = {{pca_explained_variance_ratio_|length}}
+let label_cumle_array =[]
+for(var i=0;i<label_cumle;i++){
+  label_cumle_array.push(i)
+}
+console.log(label_cumle_array)
+let array = [
+{% for pourcentage in pca_explained_variance_ratio_%}
+  {{ pourcentage }},
+{% endfor %}
+];
+array_cumule = array.map((elem, index) => array.slice(0,index + 1).reduce((a, b) => a + b));
+console.log(array_cumule);
+
+/**
+ * Bar Chart
+*/
+var t = {{pca_explained_variance_ratio_|length}}
+var labels_bar = []
+for(var i=0;i<t;i++){  
+  labels_bar.push(i)
+}
+
+var canvas = document.getElementById('BarChart');
+var data_bar = {
+    labels: labels_bar,
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: "rgba(255,99,132,0.2)",
+            borderColor: "rgba(255,99,132,1)",
+            borderWidth: 2,
+            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: [
+              {% for pourcentage in pca_explained_variance_ratio_%}
+                {{ pourcentage }},
+              {% endfor %}
+            ]//$('#pca_explained_variance_ratio_').val(),
+        }
+    ]
+};
+console.log($('#pca_explained_variance_ratio_').val())
+var option_bar = {
+  animation: {
+          duration:5000
+  }
+};
+
+var myBarChart = Chart.Bar(canvas,{
+	data:data_bar,
+  options:option_bar
+});
+
+/**
+ * Bubble Chart
+ * ce script genere les deux graphes d'elbow ainsi il calcule la valeur de k
+*/
+var l = {{inertias|length}}
+var labels = []
+for(var i=0;i<l;i++){
+  labels.push(i+1)
+}
+var data_for_elbow_line =[]
+var distances =[]
+
+// determine a and b to get the line equation 
+// y=ax+b
+// b always inertias[0]
+// a equal -b/labels.length
+var a = 0
+var inertias= {{ inertias }}
+b=inertias[0]
+a=-b/l
+console.log('y='+a+'X+'+b)
+for(var i=0;i<l;i++){
+  y=a*i+b
+  var d1 = i - i;
+  var d2 = y - inertias[i];
+
+  var c = Math.sqrt( d1*d1 + d2*d2 );
+  distances.push(c)
+  data_for_elbow_line.push(y)
+}
+var indexOfMaxValue = distances.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+
+var k = indexOfMaxValue+1
+
+
+
+///
+
+
+
+var data = [
+  {% for x_y in two_pca_components %}
+    [
+    {% for x in x_y %}
+      {{x}},
+    {% endfor %}
+  ],
+  {% endfor %}
+];
+
+var colors = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
+
+var clusters = clusterfck.kmeans(data, k);
+//console.log(kmeans.cluster(data, 2))
+//var kmeans = new clusterfck.Kmeans();
+
+var i=0
+var datasets = []
+clusters.map(function (val,index) {
+  i++
+   val.map(function (v,i) {
+     var elt = {
+      label: i,
+          data: [
+            {
+              x: v[0],
+              y: v[1],
+              r:8
+            }
+          ],
+          backgroundColor:colors[index],
+     }
+     datasets.push(elt)
+   })
+})
+
+var options = {
+  type: 'bubble',
+  data: {
+    datasets: datasets
+  },
+  options: {        
+  legend: {
+  display: false
+  }
+}
+
+}
+var ctx = document.getElementById('bubbleChart').getContext('2d');
+new Chart(ctx, options);
+
+
+
+var options = {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+			{
+				label: 'graphe Elbow ',
+				data: [
+        {% for inertia in inertias %}
+          {{ inertia }},
+        {% endfor %}
+
+        ],
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1
+      },
+      {
+	      label: 'droite des distances ',
+	      data: data_for_elbow_line,
+      	borderWidth: 1
+    	},	
+
+		]
+  },
+  options: {
+  	scales: {
+    	yAxes: [{
+        ticks: {
+					reverse: false
+        }
+      }]
+    }
+  }
+}
+
+var ctx = document.getElementById('chartJSContainer').getContext('2d');
+//////////////////////////////////////////////////////////////////////
+new Chart(ctx, options);
+
+
+var options_cum = {
+  type: 'line',
+  data: {
+    labels: label_cumle_array,
+    datasets: [
+			{
+				label: 'Graphe Cumulé ',
+				data: array_cumule,
+        backgroundColor: "rgba(255,99,132,0.2)",
+        borderColor: "rgba(255,99,132,1)",
+        borderWidth: 1
+      },
+
+		]
+  },
+  options: {
+  	scales: {
+    	yAxes: [{
+        ticks: {
+					reverse: false
+        }
+      }]
+    }
+  }
+}
+
+var cctx = document.getElementById('cumule').getContext('2d');
+//////////////////////////////////////////////////////////////////////
+new Chart(cctx, options_cum);
+
+
+
+
+</script>
+
+</body>
+</html>
