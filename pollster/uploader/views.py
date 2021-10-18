@@ -194,19 +194,7 @@ def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                 if l == 5:
                     PE.append(a)
             elif crédibilité(a, classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a,Criteres,Performances,Seuils,Poids) < Lambda:
-
-                if (i == 0 and z == 0) or (z == 1 and i == 1) and p == 0:
-                    OA.append(a)
-                    PE.append(a)
-                    z = z + 1
-                    i = i + 1
-                    p = p + 1
-                if i == 1 and z == 0 and p == 0:
-                    OA.append(a)
-                    z = z + 1
-                if i == 0 and z == 1 and p == 0:
-                    PE.append(a)
-                    i = i + 1
+                continue
 
     resulta = [PE, PD, PC, PB, PA, OE, OD, OC, OB, OA]
     return resulta
