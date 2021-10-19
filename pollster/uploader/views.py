@@ -232,7 +232,7 @@ def launchElectre(request,id):
     wilaya = []
     for element1, element2 in zip_object:
         wilaya.append((element1, element2))
-
+    print(wilaya)
     per = (df.iloc[:dimensions[0]-minus, 1:dimensions[1]-1]).to_dict('records')
 
     Performances = {}
@@ -253,7 +253,7 @@ def launchElectre(request,id):
     Lambda = 0.75
 
     for classe in Classes[:-1]:
-        resulta = electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda)
+        resulta = electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda)
 
     print('\n\n****************optimiste******************')
     print('\n', resulta[0], 'E\n', resulta[1], 'D\n', resulta[2], 'C\n', resulta[3], 'B\n', resulta[4], 'A\n')
