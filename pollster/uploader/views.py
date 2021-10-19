@@ -96,7 +96,7 @@ def crédibilité2(bh, a,Criteres,Performances,Seuils,Poids):
     return sigma_abh
 
 
-def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
+def electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda):
     PE = []
     PD = []
     PC = []
@@ -107,14 +107,14 @@ def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
     OC = []
     OB = []
     OA = []
-    for a in Actions:
+    for a in wilaya:
         i = 0
         z = 0
         l = 0
         p = 0
         # ['A', 'B', 'C', 'd', 'E']
         for classe in Classes[:-1]:
-            if crédibilité(a, classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a,Criteres,Performances,Seuils,Poids) >= Lambda:
+            if crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) >= Lambda:
                 l = l + 1
                 if classe == 'E' and i == 0:
                     PD.append(a)
@@ -153,7 +153,7 @@ def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                 if l == 5 and i == 0 and z == 1:
                     PE.append(a)
 
-            elif crédibilité(a, classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a,Criteres,Performances,Seuils,Poids) < Lambda:
+            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) < Lambda:
                 l = l + 1
                 if classe == 'E' and i == 0:
                     PD.append(a)
@@ -173,7 +173,7 @@ def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                     l = l + 1
                 if l == 5:
                     OA.append(a)
-            elif crédibilité(a, classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a,Criteres,Performances,Seuils,Poids) >= Lambda:
+            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) >= Lambda:
                 l = l + 1
                 if classe == 'E' and z == 0:
                     OE.append(a)
@@ -193,7 +193,7 @@ def electretri(Actions,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                     l = l + 1
                 if l == 5:
                     PE.append(a)
-            elif crédibilité(a, classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a,Criteres,Performances,Seuils,Poids) < Lambda:
+            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) < Lambda:
                 continue
 
     resulta = [PE, PD, PC, PB, PA, OE, OD, OC, OB, OA]
@@ -215,6 +215,7 @@ def launchElectre(request,id):
     Poids.pop('Alternative')
 
     Criteres = list(Poids.keys())
+    Criteres.pop()
 
     first_column = (df.iloc[:, 0]).to_dict()
     values = first_column.values()
@@ -223,7 +224,16 @@ def launchElectre(request,id):
     for i in range(0,dimensions[0]-minus):
         Actions.append(values_list[i])
 
-    per = (df.iloc[:dimensions[0]-minus, 1:]).to_dict('records')
+    # pdv with wilaya
+    col_wilaya = (df.iloc[:dimensions[0] - minus, dimensions[1] - 1:dimensions[1]]).to_dict('list')
+    pdv_wilaya = list(col_wilaya.values())
+    pdvwi = pdv_wilaya[0].copy()
+    zip_object = zip(Actions, pdvwi)
+    wilaya = []
+    for element1, element2 in zip_object:
+        wilaya.append((element1, element2))
+
+    per = (df.iloc[:dimensions[0]-minus, 1:dimensions[1]-1]).to_dict('records')
 
     Performances = {}
     for i in range(0,len(Actions)):
