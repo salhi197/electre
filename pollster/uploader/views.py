@@ -212,7 +212,7 @@ def launchElectre(request,id):
     x=dimensions[0]
 
     Poids=(df.iloc[-1]).to_dict()
-    Poids.pop('Alternative')
+    Poids.pop('Alternatives ')
 
     Criteres = list(Poids.keys())
     Criteres.pop()

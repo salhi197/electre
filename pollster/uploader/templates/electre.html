@@ -107,29 +107,29 @@
                       <table class="table" id="myTable1">
                         <thead>
                           <tr>
+                            <th scope="col">Pdv</th>
                             <th scope="col">Wilaya</th>
                             <th scope="col">Classe</th>
-                            <th scope="col">Pdv</th>
                           </tr>
                         </thead>
                         <tbody>
                           {% for res in resulta4 %}
                           <tr>
-                            <th scope="row">1</th>
-                            <td>A</td>
                             <td>
-                              {{res}}
-                            </td>
+                              {{res.0}}
+                            </td>                            
+                            <th scope="row">{{res.1}}</th>
+                            <td>A</td>
                           </tr>                          
                           {% endfor %}
 
                           {% for res in resulta3 %}
                           <tr>
-                            <th scope="row">2</th>
-                            <td>B</td>
                             <td>
-                              {{res}}
-                            </td>
+                              {{res.0}}
+                            </td>                            
+                            <th scope="row">{{res.1}}</th>
+                            <td>B</td>
                           </tr>
                           {% endfor %}
 
@@ -137,32 +137,32 @@
 
                           {% for res in resulta2 %}
                           <tr>
-                            <th scope="row">3</th>
-                            <td>C</td>
                             <td>
-                              {{res}}
-                            </td>
+                              {{res.0}}
+                            </td>                            
+                            <th scope="row">{{res.1}}</th>
+                            <td>C</td>
                           </tr>
                           {% endfor %}
 
                           {% for res in resulta1 %}
                           <tr>
-                            <th scope="row">4</th>
-                            <td>D</td>
                             <td>
-                              {{res}}
-              
+                              {{res.0}}              
                             </td>
+                            <th scope="row">{{res.1}}</th>
+                            <td>D</td>
+
                           </tr>
                           {% endfor %}
 
                           {% for res in resulta0 %}
                           <tr>
-                            <th scope="row">5</th>
-                            <td>E</td>
                             <td>
-                              {{res}}
-                            </td>
+                              {{res.0}}
+                            </td>                            
+                            <th scope="row">{{res.1}}</th>
+                            <td>E</td>
                           </tr>
                           {% endfor %}
                           
@@ -189,50 +189,48 @@
                       <table class="table" id="myTable2">
                         <thead>
                           <tr>
+                            <th scope="col">Pdv</th>
                             <th scope="col">Wilaya</th>
                             <th scope="col">Classe</th>
-                            <th scope="col">Pdv</th>
                           </tr>
                         </thead>
                         <tbody>
                           {% for res in resulta9 %}
                           <tr>
-                            <th scope="row">1</th>
-                            <td>A</td>
                             <td>
-                              {{res}}
+                              {{res.0}}
                             </td>
+                            <th scope="row">{{res.1}}</th>
+                            <td>A</td>
                           </tr>                          
                           {% endfor %}
 
                           {% for res in resulta8 %}
                           <tr>
-                            <th scope="row">2</th>
-                            <td>B</td>
                             <td>
-                              {{res}}
+                              {{res.0}}
                             </td>
+                            <th scope="row">{{res.1}}</th>
+                            <td>B</td>
                           </tr>
                           {% endfor %}
 
-
-
                           {% for res in resulta7 %}
                           <tr>
-                            <th scope="row">3</th>
-                            <td>C</td>
                             <td>
-                              {{res}}
+                              {{res.0}}
                             </td>
+                            <th scope="row">{{res.1}}</th>
+                            <td>C</td>
                           </tr>
                           {% endfor %}
 
                           {% for res in resulta6 %}
                           <tr>
-                            <th scope="row">4</th>
+                            <th scope="row">{{res.1}}</th>
                             <td>D</td>
                             <td>
-                              {{res}}
+                              {{res.0}}
               
                             </td>
                           </tr>
@@ -240,11 +238,11 @@
 
                           {% for res in resulta5 %}
                           <tr>
-                            <th scope="row">5</th>
-                            <td>E</td>
                             <td>
-                              {{res}}
+                              {{res.0}}
                             </td>
+                            <th scope="row">{{res.1}}</th>
+                            <td>E</td>
                           </tr>
                           {% endfor %}
               
