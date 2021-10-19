@@ -107,48 +107,68 @@
                       <table class="table" id="myTable1">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Wilaya</th>
                             <th scope="col">Classe</th>
-                            <th scope="col">Les PDVs</th>
+                            <th scope="col">Pdv</th>
                           </tr>
                         </thead>
                         <tbody>
+                          {% for res in resulta4 %}
                           <tr>
                             <th scope="row">1</th>
                             <td>A</td>
                             <td>
-                              {{resulta4}}
+                              {{res}}
                             </td>
-                          </tr>
+                          </tr>                          
+                          {% endfor %}
+
+                          {% for res in resulta3 %}
                           <tr>
                             <th scope="row">2</th>
                             <td>B</td>
                             <td>
-                              {{resulta3}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
+
+
+
+                          {% for res in resulta2 %}
                           <tr>
                             <th scope="row">3</th>
                             <td>C</td>
                             <td>
-                              {{resulta2}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
+
+                          {% for res in resulta1 %}
                           <tr>
                             <th scope="row">4</th>
                             <td>D</td>
                             <td>
-                              {{resulta1}}
+                              {{res}}
               
                             </td>
                           </tr>
+                          {% endfor %}
+
+                          {% for res in resulta0 %}
                           <tr>
                             <th scope="row">5</th>
                             <td>E</td>
                             <td>
-                              {{resulta0}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
+                          
+
+
+
               
                         </tbody>
                       </table>
@@ -164,55 +184,69 @@
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-          
-                  
+                <div class="accordion-body">          
                   <div class="table-responsive">
                       <table class="table" id="myTable2">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Wilaya</th>
                             <th scope="col">Classe</th>
-                            <th scope="col">Les PDVs</th>
+                            <th scope="col">Pdv</th>
                           </tr>
                         </thead>
                         <tbody>
+                          {% for res in resulta9 %}
                           <tr>
                             <th scope="row">1</th>
                             <td>A</td>
                             <td>
-                              {{resulta9}}
+                              {{res}}
                             </td>
-                          </tr>
+                          </tr>                          
+                          {% endfor %}
+
+                          {% for res in resulta8 %}
                           <tr>
                             <th scope="row">2</th>
                             <td>B</td>
                             <td>
-                              {{resulta8}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
+
+
+
+                          {% for res in resulta7 %}
                           <tr>
                             <th scope="row">3</th>
                             <td>C</td>
                             <td>
-                              {{resulta7}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
+
+                          {% for res in resulta6 %}
                           <tr>
                             <th scope="row">4</th>
                             <td>D</td>
                             <td>
-                              {{resulta6}}
+                              {{res}}
               
                             </td>
                           </tr>
+                          {% endfor %}
+
+                          {% for res in resulta5 %}
                           <tr>
                             <th scope="row">5</th>
                             <td>E</td>
                             <td>
-                              {{resulta5}}
+                              {{res}}
                             </td>
                           </tr>
+                          {% endfor %}
               
                         </tbody>          
                       </table>

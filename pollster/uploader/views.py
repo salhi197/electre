@@ -205,6 +205,7 @@ def launchElectre(request,id):
     df = pd.read_excel(file.pic.file)
     Classes = ['E', 'D', 'C', 'B', 'A']
 
+
     lenclasses = len(Classes)
     minus = lenclasses+3
     dimensions = df.shape
