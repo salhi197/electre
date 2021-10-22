@@ -34,65 +34,97 @@ def showFile(request, id):
 
 def Concordance(a, bh,Criteres,Poids,Performances,Seuils):
     conc = 0.0
+    concs = 0.0
+    poids = 0.0
     for critere in Criteres:
-        poids = Poids[critere]
+        poids += Poids[critere]
         ga = Performances[a][critere]
         gbh, qbh, pbh, vbh = Seuils[bh][critere]
         if gbh - ga >= pbh:
-            conc += 0.0 * poids
+            conc = 0.0
         elif gbh - ga <= qbh:
-            conc += 1.0 * poids
-        else:
-            conc += ((pbh + ga - gbh) / (pbh - qbh)) * poids
-    return conc
+            conc = 1.0
+        elif qbh <= gbh - ga < pbh:
+            conc = ((pbh + ga - gbh) / (pbh - qbh))
+        concs += Poids[critere] * conc
+    Cglob = concs / poids
+    return Cglob
 
 
 def Concordance2(bh, a,Criteres,Poids,Performances,Seuils):
     conc = 0.0
+    concs = 0.0
+    poids = 0.0
     for critere in Criteres:
-        poids = Poids[critere]
+        poids += Poids[critere]
         ga = Performances[a][critere]
         gbh, qbh, pbh, vbh = Seuils[bh][critere]
-        if ga - gbh >= 0:
-            conc += 0.0 * poids
-        elif ga - gbh <= 0:
-            conc += 1.0 * poids
-    return conc
+        if ga - gbh >= pbh:
+            conc = 0.0
+        elif ga - gbh < qbh:
+            conc = 1.0
+        elif qbh <= ga - gbh < pbh:
+            conc = ((pbh - ga + gbh) / (pbh - qbh))
+        concs += Poids[critere] * conc
+    Cglob = concs / poids
+    return Cglob
 
 
 def DiscordanceCritere(a, bh, critere,Performances,Seuils):
     ga = Performances[a][critere]
     gbh, qbh, pbh, vbh = Seuils[bh][critere]
-    if ga <= gbh - pbh:
-        return 0.0
-    elif ga > gbh + vbh:
-        return 1.0
-    else:
-        return ((gbh + pbh) - ga) / (pbh + vbh)
+    discord = 0.0
+    if gbh - ga < pbh:
+        discord = 0.0
+    elif gbh - ga >= vbh:
+        discord = 1.0
+    elif pbh <= gbh - ga < vbh:
+        discord = ((-pbh - ga + gbh) / (vbh - pbh))
+    return discord
 
 
 def DiscordanceCritere2(bh, a, critere,Performances,Seuils):
     ga = Performances[a][critere]
     gbh, qbh, pbh, vbh = Seuils[bh][critere]
-    if gbh <= ga - 0:
-        return 0.0
-    elif gbh > ga + 0:
-        return 1.0
+    discord = 0.0
+    if ga - gbh < pbh:
+        discord = 0.0
+    elif ga - gbh >= vbh:
+        discord = 1.0
+    elif pbh <= ga - gbh < vbh:
+        discord = ((-pbh - gbh + ga) / (vbh - pbh))
+    return discord
 
 
 def crédibilité(a, bh,Criteres,Performances,Seuils,Poids):
     mult = 1
+    i = 0
+    conc = Concordance(a, bh,Criteres,Poids,Performances,Seuils)
     for critere in Criteres:
-        mult = mult * ((2 - DiscordanceCritere(a, bh, critere,Performances,Seuils)) / (2 - Concordance(a, bh,Criteres,Poids,Performances,Seuils)))
-    sigma_abh = Concordance(a, bh,Criteres,Poids,Performances,Seuils) * mult
+        dicord = DiscordanceCritere(a, bh, critere,Performances,Seuils)
+        if dicord > conc:
+            i += 1
+            mult = mult * ((1 - dicord) / (1 - conc))
+    if i == len(Criteres):
+        sigma_abh = conc * mult
+    else:
+        sigma_abh = conc
     return sigma_abh
 
 
 def crédibilité2(bh, a,Criteres,Performances,Seuils,Poids):
     mult = 1
+    i = 0
+    conc = Concordance2(bh, a,Criteres,Poids,Performances,Seuils)
     for critere in Criteres:
-        mult = mult * ((2 - DiscordanceCritere2(bh, a, critere,Performances,Seuils)) / (2 - Concordance2(bh, a,Criteres,Poids,Performances,Seuils)))
-    sigma_abh = Concordance2(bh, a,Criteres,Poids,Performances,Seuils) * mult
+        dicord = DiscordanceCritere2(bh, a, critere,Performances,Seuils)
+        if dicord > conc:
+            i += 1
+            mult = mult * ((1 - dicord) / (1 - conc))
+    if i == len(Criteres):
+        sigma_abh = conc * mult
+    else:
+        sigma_abh = conc
     return sigma_abh
 
 
@@ -212,7 +244,7 @@ def launchElectre(request,id):
     x=dimensions[0]
 
     Poids=(df.iloc[-1]).to_dict()
-    Poids.pop('Alternatives ')
+    Poids.pop('Alternatives')
 
     Criteres = list(Poids.keys())
     Criteres.pop()
