@@ -8,8 +8,10 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap
       contributors">
     <meta name="generator" content="Hugo 0.88.1">
+    <link rel="shortcut icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/OoredooDZ_Logo%2BOoredoo%2B160x26.svg/1280px-OoredooDZ_Logo%2BOoredoo%2B160x26.svg.png">
     <title>
-      Electre
+      Résultat de la classification
     </title>
     <style>
         #loading {
@@ -45,27 +47,35 @@
 
     <!-- Favicons -->
     <link rel="apple-touch-icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/apple-touch-icon.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="180x180">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-32x32.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="32x32" type="image/png">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-16x16.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="16x16" type="image/png">
     <link rel="manifest"
       href="https://getbootstrap.com/docs/5.1/assets/img/favicons/manifest.json">
     <link rel="mask-icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       color="#7952b3">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon.ico">
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg">
     <link rel="stylesheet" type="text/css"
       href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet">
     <meta name="theme-color" content="#7952b3">
 
 
     <style>
+
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;0,700;0,800;1,100;1,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -79,8 +89,7 @@
           font-size: 3.5rem;
         }
       }
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;0,700;0,800;1,100;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+     
 *{
     /*box-sizing: border-box;*/
     box-sizing: content-box;
@@ -95,7 +104,6 @@ li, a, button{
     font-size: 16px;
     color: #edf0f1;
     text-decoration: none;
-
 }
 
 header {
@@ -104,6 +112,14 @@ header {
     align-items: center;
     padding: 5px 5%;
     background-color: #24252A;
+}
+
+h3{
+    color: #fff;
+}
+
+h4{
+  color: #fff;
 }
 
 .logo{
@@ -117,7 +133,7 @@ header {
 
 .nav-links li{
     display: inline-block;
-    padding: 0px 20px;
+    padding: 5px 20px;
 }    
 
 .nav-links li a{
@@ -129,7 +145,6 @@ button{
     background-color: #EB1C22;
     border: none;
     border-radius: 50px;
-
 }
     </style>
     <!-- Custom styles for this template -->
@@ -140,17 +155,96 @@ button{
   <body>
 
     {% include "top.html" %}
+    <br>
+    <h1 style="text-align: center;">Statistique des PDV & Classes</h1>
+    <br>
+    <!--Résultat Optimiste:-->
+    <div class="row">
+      <h3>
+        &nbsp;Pisimiste :
+      </h3>
+
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Classe A :</h5>
+            <h6 style="color: #E26A2C;"><b><img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVhJREFUSEvFlf8xBEEQhb+LgAwQATIgAkSADIgAEZABIkAEJwQiQAZkoL6rGWandnZm1F3pf65ut/u97tc/dsaKbbZifP6V4AS4BtYrVX4C58DdmF+pgj1g3infPvCcx5QIXoBt4Aq4rBD5/gIwZreF4CxI8wHsAEowZUoo+EaQ6iZ1zivQ+S3oPlpygekQeAjJbKVJ5QSPwAHwBBjUYzHW36MYmBLExn4Fad570IHNINUa8FN9SiCgOi7DxFKqwaLFyVkGwWtQYUBgg2W2RJfmtJPJmGNAiZVrMX15kx1Ll6WXJAW3l6qxsLFFS0l6Fs3MB+AlAp97h25DEko1emda/KauaY2k9r4oUdrbeGdsmLMdtVVGj6GDMSljy/cgNjCSmEAEvw8yFQeuhcDglMT/Zl4Fn2pynpGAjq8nXHORnJjape36ZEYSCZrAeyroXOpf99Ye/JngG/xdSBnz8SM1AAAAAElFTkSuQmCC"
+                  />
+                DIAMOND</b></h6>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-primary" style="background: #E26A2C;
+              border-color:#fff; border-radius:10px">{{len9}} PDV</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Classe B :</h5>
+            <h6 style="color: #000;"><b>BLADIOM</b></h6>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-primary" style="background: #000;
+              border-color:#fff; border-radius:10px">{{len8}} PDV</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Classe C :</h5>
+            <h6 style="color: #000;"><b>GOLD</b></h6>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-primary" style="background: #000;
+              border-color:#fff; border-radius:10px">{{len7}} PDV</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Classe D :</h5>
+            <h6 style="color: #000;"><b>PLATINIUM</b></h6>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-primary" style="background: #000;
+              border-color:#fff; border-radius:10px">{{len6}} PDV</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Classe E :</h5>
+            <h6 style="color: #5C7AEA;"><b>SILVER</b></h6>
+            <p class="card-text"></p>
+            <a href="#" class="btn btn-primary" style="background: #5C7AEA;
+              border-color:#fff; border-radius:10px">{{len5}} PDV</a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><hr>
+    <!--Résultat Optimiste:-->
     <div class="container-fluid">
       <div class="row">
-        <h2>
-          Résulatat Optimiste:
-        </h2>
+        <h3>
+          Optimiste :
+        </h3>
         <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Class A </h5>
+              <h5 class="card-title">Classe A :</h5>
+              <h6 style="color: #E26A2C;"><b><img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAVhJREFUSEvFlf8xBEEQhb+LgAwQATIgAkSADIgAEZABIkAEJwQiQAZkoL6rGWandnZm1F3pf65ut/u97tc/dsaKbbZifP6V4AS4BtYrVX4C58DdmF+pgj1g3infPvCcx5QIXoBt4Aq4rBD5/gIwZreF4CxI8wHsAEowZUoo+EaQ6iZ1zivQ+S3oPlpygekQeAjJbKVJ5QSPwAHwBBjUYzHW36MYmBLExn4Fad570IHNINUa8FN9SiCgOi7DxFKqwaLFyVkGwWtQYUBgg2W2RJfmtJPJmGNAiZVrMX15kx1Ll6WXJAW3l6qxsLFFS0l6Fs3MB+AlAp97h25DEko1emda/KauaY2k9r4oUdrbeGdsmLMdtVVGj6GDMSljy/cgNjCSmEAEvw8yFQeuhcDglMT/Zl4Fn2pynpGAjq8nXHORnJjape36ZEYSCZrAeyroXOpf99Ye/JngG/xdSBnz8SM1AAAAAElFTkSuQmCC"
+                    /> DIAMOND</b></h6>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len4}} Pdv</a>
+              <a href="#" class="btn btn-primary" style="background: #E26A2C;
+                border-color:#fff; border-radius:10px">{{len4}} PDV</a>
             </div>
           </div>
         </div>
@@ -158,27 +252,33 @@ button{
         <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Class B </h5>
+              <h5 class="card-title">Classe B :</h5>
+              <h6 style="color: #EE151F;"><b>BLADIOM</b></h6>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len3}} Pdv</a>
+              <a href="#" class="btn btn-primary" style="background: #EE151F;
+                border-color:#fff; border-radius:10px">{{len3}} PDV</a>
             </div>
           </div>
         </div>
         <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Class C </h5>
+              <h5 class="card-title">Classe C :</h5>
+              <h6 style="color: #EE151F;"><b>GOLD</b></h6>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len2}} Pdv</a>
+              <a href="#" class="btn btn-primary" style="background: #EE151F;
+                border-color:#fff; border-radius:10px">{{len2}} PDV</a>
             </div>
           </div>
         </div>
         <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Class D </h5>
+              <h5 class="card-title">Classe D :</h5>
+              <h6 style="color: #EE151F;"><b>PLATINIUM</b></h6>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len1}} Pdv</a>
+              <a href="#" class="btn btn-primary" style="background: #EE151F;
+                border-color:#fff; border-radius:10px">{{len1}} Pdv</a>
 
             </div>
           </div>
@@ -186,250 +286,189 @@ button{
         <div class="col-md-2">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Class E </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len0}} Pdv</a>
+              <h5 class="card-title">Classe E :</h5>
+              <h6 style="color: #5C7AEA;"><b>SILVER</b></h6>
+              <a href="#" class="btn btn-primary" style="background: #5C7AEA;
+                border-color:#fff; border-radius:10px">{{len0}} PDV</a>
             </div>
           </div>
         </div>
-
       </div>
-
-
-      <div class="row">
-        <h2>
-          Résulatat Pesimiste:
+      <hr>
+      <h1 style="text-align: center;">Tableau de Classification</h1>
+      <br>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button"
+            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+            aria-expanded="false" aria-controls="collapseTwo"
+            style="background:#000; color:#fff;">
+            Résultat Pesimiste :
+          </button>
         </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse"
+          aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <div class="table-responsive">
+              ---------------
+              <table class="table" id="myTable2">
+                <thead>
+                  <tr>
+                    <th scope="col">PDV</th>
+                    <th scope="col">Wilaya</th>
+                    <th scope="col">Classe</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for res in resulta9 %}
+                  <tr>
+                    <td>
+                      {{res.0}}
+                    </td>
+                    <th scope="row">{{res.1}}</th>
+                    <td>A</td>
+                  </tr>
+                  {% endfor %}
 
-        <div class="col-md-2">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Class A </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len9}} Pdv</a>
+                  {% for res in resulta8 %}
+                  <tr>
+                    <td>
+                      {{res.0}}
+                    </td>
+                    <th scope="row">{{res.1}}</th>
+                    <td>B</td>
+                  </tr>
+                  {% endfor %}
+
+                  {% for res in resulta7 %}
+                  <tr>
+                    <td>
+                      {{res.0}}
+                    </td>
+                    <th scope="row">{{res.1}}</th>
+                    <td>C</td>
+                  </tr>
+                  {% endfor %}
+
+                  {% for res in resulta6 %}
+                  <tr>
+                    <th scope="row">{{res.1}}</th>
+                    <td>D</td>
+                    <td>
+                      {{res.0}}
+
+                    </td>
+                  </tr>
+                  {% endfor %}
+
+                  {% for res in resulta5 %}
+                  <tr>
+                    <td>
+                      {{res.0}}
+                    </td>
+                    <th scope="row">{{res.1}}</th>
+                    <td>E</td>
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-
-        <div class="col-md-2">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Class B </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len8}} Pdv</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Class C </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len7}} Pdv</a>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Class D </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len6}} Pdv</a>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Class E </h5>
-              <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">{{len5}} Pdv</a>
-
-            </div>
-          </div>
-        </div>
-
       </div>
+    </div>
+
+    <div class="row">
+      <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+        <br>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne"
+                style="background:#EE151F; color:#fff;">
+                Résultat Optimiste :
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show"
+              aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <div class="table-responsive">
+                  <table class="table" id="myTable1">
+                    <thead>
+                      <tr>
+                        <th scope="col">PDV</th>
+                        <th scope="col">Wilaya</th>
+                        <th scope="col">Classe</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for res in resulta4 %}
+                      <tr>
+                        <td>
+                          {{res.0}}
+                        </td>
+                        <th scope="row">{{res.1}}</th>
+                        <td>A</td>
+                      </tr>
+                      {% endfor %}
+
+                      {% for res in resulta3 %}
+                      <tr>
+                        <td>
+                          {{res.0}}
+                        </td>
+                        <th scope="row">{{res.1}}</th>
+                        <td>B</td>
+                      </tr>
+                      {% endfor %}
 
 
 
-      <div class="row">
+                      {% for res in resulta2 %}
+                      <tr>
+                        <td>
+                          {{res.0}}
+                        </td>
+                        <th scope="row">{{res.1}}</th>
+                        <td>C</td>
+                      </tr>
+                      {% endfor %}
 
+                      {% for res in resulta1 %}
+                      <tr>
+                        <td>
+                          {{res.0}}
+                        </td>
+                        <th scope="row">{{res.1}}</th>
+                        <td>D</td>
 
-        <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
-          <br>
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                  aria-expanded="true" aria-controls="collapseOne">
-                  Résultat Optimiste :
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show"
-                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <div class="table-responsive">
-                    <table class="table" id="myTable1">
-                      <thead>
-                        <tr>
-                          <th scope="col">PDV</th>
-                          <th scope="col">Wilaya</th>
-                          <th scope="col">Classe</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for res in resulta4 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>A</td>
-                        </tr>
-                        {% endfor %}
+                      </tr>
+                      {% endfor %}
 
-                        {% for res in resulta3 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>B</td>
-                        </tr>
-                        {% endfor %}
-
-
-
-                        {% for res in resulta2 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>C</td>
-                        </tr>
-                        {% endfor %}
-
-                        {% for res in resulta1 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>D</td>
-
-                        </tr>
-                        {% endfor %}
-
-                        {% for res in resulta0 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>E</td>
-                        </tr>
-                        {% endfor %}
-
+                      {% for res in resulta0 %}
+                      <tr>
+                        <td>
+                          {{res.0}}
+                        </td>
+                        <th scope="row">{{res.1}}</th>
+                        <td>E</td>
+                      </tr>
+                      {% endfor %}
 
 
 
 
-                      </tbody>
-                    </table>
-                  </div>
 
+                    </tbody>
+                  </table>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                  aria-expanded="false" aria-controls="collapseTwo">
-                  Résultat Pesimiste :
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse"
-                aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <div class="table-responsive">
-                    <table class="table" id="myTable2">
-                      <thead>
-                        <tr>
-                          <th scope="col">Pdv</th>
-                          <th scope="col">Wilaya</th>
-                          <th scope="col">Classe</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for res in resulta9 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>A</td>
-                        </tr>
-                        {% endfor %}
 
-                        {% for res in resulta8 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>B</td>
-                        </tr>
-                        {% endfor %}
-
-                        {% for res in resulta7 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>C</td>
-                        </tr>
-                        {% endfor %}
-
-                        {% for res in resulta6 %}
-                        <tr>
-                          <th scope="row">{{res.1}}</th>
-                          <td>D</td>
-                          <td>
-                            {{res.0}}
-
-                          </td>
-                        </tr>
-                        {% endfor %}
-
-                        {% for res in resulta5 %}
-                        <tr>
-                          <td>
-                            {{res.0}}
-                          </td>
-                          <th scope="row">{{res.1}}</th>
-                          <td>E</td>
-                        </tr>
-                        {% endfor %}
-
-                      </tbody>
-                    </table>
-                  </div>
-
-
-
-                </div>
               </div>
             </div>
           </div>
-
-
 
         </main>
       </div>

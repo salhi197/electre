@@ -8,7 +8,7 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap
       contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Eletre Tri</title>
+    <title>Importation de Fichier Excel</title>
 
     <link rel="canonical"
       href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
@@ -22,33 +22,49 @@
       crossorigin="anonymous">
 
     <!-- Favicons -->
+    <link href="https://getbootstrap.com/docs/5.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous">
+
+    <!-- Favicons -->
     <link rel="apple-touch-icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/apple-touch-icon.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="180x180">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-32x32.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="32x32" type="image/png">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon-16x16.png"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       sizes="16x16" type="image/png">
     <link rel="manifest"
       href="https://getbootstrap.com/docs/5.1/assets/img/favicons/manifest.json">
     <link rel="mask-icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg"
       color="#7952b3">
     <link rel="icon"
-      href="https://getbootstrap.com/docs/5.1/assets/img/favicons/favicon.ico">
+      href="https://upload.wikimedia.org/wikipedia/commons/b/b6/Ooredoo.svg">
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap"
+      rel="stylesheet">
     <meta name="theme-color" content="#7952b3">
 
 
+
     <style>
+
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;0,700;0,800;1,100;1,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
         -moz-user-select: none;
         user-select: none;
-        background: #EB1C22;
       }
 
       @media (min-width: 768px) {
@@ -56,8 +72,7 @@
           font-size: 3.5rem;
         }
       }
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,500;0,700;0,800;1,100;1,700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+     
 *{
     /*box-sizing: border-box;*/
     box-sizing: content-box;
@@ -72,7 +87,6 @@ li, a, button{
     font-size: 16px;
     color: #edf0f1;
     text-decoration: none;
-
 }
 
 header {
@@ -81,6 +95,14 @@ header {
     align-items: center;
     padding: 5px 5%;
     background-color: #24252A;
+}
+
+h3{
+    color: #fff;
+}
+
+h4{
+  color: #fff;
 }
 
 .logo{
@@ -94,7 +116,7 @@ header {
 
 .nav-links li{
     display: inline-block;
-    padding: 2px 20px;
+    padding: 5px 20px;
 }    
 
 .nav-links li a{
@@ -106,7 +128,6 @@ button{
     background-color: #EB1C22;
     border: none;
     border-radius: 50px;
-
 }
     </style>
     <!-- Custom styles for this template -->
@@ -126,10 +147,12 @@ button{
 
           <h4>Détail de fichier : {{file.pic.file}}</h4>
           <div class="form-group">
-            <a href="{{file.id}}/electre" class="btn btn-primary">Lancer Electre
+            <a href="{{file.id}}/electre" class="btn btn-primary"
+              style="background:#EB1C22; border-color:#fff;"> -> Lancer Electre
+              tri
               Tri</a>
           </div>
-
+          <br>
           <div class="table-responsive">
             <table class="table table-striped table-sm" id="myTable">
               <thead>
