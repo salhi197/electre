@@ -287,7 +287,6 @@ def launchElectre(request,id):
     for classe in Classes[:-1]:
         resulta = electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda)
 
-
     print(len(resulta[4]))
     return render(request,'electre.html',
         {
@@ -302,6 +301,7 @@ def launchElectre(request,id):
             "resulta7":resulta[7],"len7":len(resulta[7]),
             "resulta8":resulta[8],"len8":len(resulta[8]),
             "resulta9":resulta[9],"len9":len(resulta[9]),
+            "nombre_pdv":len(resulta[0])+len(resulta[1])+len(resulta[2])+len(resulta[3])+len(resulta[4])+len(resulta[5])+len(resulta[6])+len(resulta[7])+len(resulta[8])+len(resulta[9])
             
         })
     
