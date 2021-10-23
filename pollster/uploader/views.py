@@ -244,7 +244,7 @@ def launchElectre(request,id):
     x=dimensions[0]
 
     Poids=(df.iloc[-1]).to_dict()
-    Poids.pop('Alternatives')
+    Poids.pop('Alternatives ')
 
     Criteres = list(Poids.keys())
     Criteres.pop()
@@ -264,7 +264,7 @@ def launchElectre(request,id):
     wilaya = []
     for element1, element2 in zip_object:
         wilaya.append((element1, element2))
-    print(wilaya)
+
     per = (df.iloc[:dimensions[0]-minus, 1:dimensions[1]-1]).to_dict('records')
 
     Performances = {}
@@ -287,27 +287,21 @@ def launchElectre(request,id):
     for classe in Classes[:-1]:
         resulta = electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda)
 
-    print('\n\n****************optimiste******************')
-    print('\n', resulta[0], 'E\n', resulta[1], 'D\n', resulta[2], 'C\n', resulta[3], 'B\n', resulta[4], 'A\n')
-    print('****************optimiste******************\n\n\n\n\n')
-    print('****************pessimiste******************')
-    print('\n', resulta[5], 'E\n', resulta[6], 'D\n', resulta[7], 'C\n', resulta[8], 'B\n', resulta[9], 'A\n')
-    print('****************pessimiste******************')
 
-
+    print(len(resulta[4]))
     return render(request,'electre.html',
         {
             "resulta":resulta,
-            "resulta0":resulta[0],
-            "resulta1":resulta[1],
-            "resulta2":resulta[2],
-            "resulta3":resulta[3],
-            "resulta4":resulta[4],
-            "resulta5":resulta[5],
-            "resulta6":resulta[6],
-            "resulta7":resulta[7],
-            "resulta8":resulta[8],
-            "resulta9":resulta[9]
+            "resulta0":resulta[0],"len0":len(resulta[0]),
+            "resulta1":resulta[1],"len1":len(resulta[1]),
+            "resulta2":resulta[2],"len2":len(resulta[2]),
+            "resulta3":resulta[3],"len3":len(resulta[3]),
+            "resulta4":resulta[4],"len4":len(resulta[4]),
+            "resulta5":resulta[5],"len5":len(resulta[5]),
+            "resulta6":resulta[6],"len6":len(resulta[6]),
+            "resulta7":resulta[7],"len7":len(resulta[7]),
+            "resulta8":resulta[8],"len8":len(resulta[8]),
+            "resulta9":resulta[9],"len9":len(resulta[9]),
             
         })
     
