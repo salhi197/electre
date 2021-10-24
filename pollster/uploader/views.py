@@ -50,7 +50,6 @@ def Concordance(a, bh,Criteres,Poids,Performances,Seuils):
     Cglob = concs / poids
     return Cglob
 
-
 def Concordance2(bh, a,Criteres,Poids,Performances,Seuils):
     conc = 0.0
     concs = 0.0
@@ -241,10 +240,9 @@ def launchElectre(request,id):
     lenclasses = len(Classes)
     minus = lenclasses+3
     dimensions = df.shape
-    x=dimensions[0]
-
+    nombrepdv=dimensions[0]-minus
     Poids=(df.iloc[-1]).to_dict()
-    Poids.pop('Alternatives ')
+    Poids.pop('Alternatives')
 
     Criteres = list(Poids.keys())
     Criteres.pop()
@@ -301,7 +299,7 @@ def launchElectre(request,id):
             "resulta7":resulta[7],"len7":len(resulta[7]),
             "resulta8":resulta[8],"len8":len(resulta[8]),
             "resulta9":resulta[9],"len9":len(resulta[9]),
-            "nombre_pdv":len(resulta[0])+len(resulta[1])+len(resulta[2])+len(resulta[3])+len(resulta[4])+len(resulta[5])+len(resulta[6])+len(resulta[7])+len(resulta[8])+len(resulta[9])
+            "nombre_pdv":nombrepdv
             
         })
     
