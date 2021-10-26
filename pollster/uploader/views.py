@@ -139,30 +139,12 @@ def electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda):
     OB = []
     OA = []
     for a in wilaya:
-        i = 0
         z = 0
         l = 0
-        p = 0
         # ['A', 'B', 'C', 'd', 'E']
         for classe in Classes[:-1]:
-            if crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) >= Lambda:
-                l = l + 1
-                if classe == 'E' and i == 0:
-                    PD.append(a)
-                    l = l + 1
-                    i = 1
-                if classe == 'D' and i == 0:
-                    PC.append(a)
-                    l = l + 1
-                    i = 1
-                if classe == 'C' and i == 0:
-                    PB.append(a)
-                    l = l + 1
-                    i = 1
-                if classe == 'B' and i == 0:
-                    PA.append(a)
-                    l = l + 1
-                    i = 1
+            l = l + 1
+            if crédibilité(a[0], classe, Criteres, Performances, Seuils, Poids) >= Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) < Lambda:
                 if classe == 'E' and z == 0:
                     OE.append(a)
                     z = z + 1
@@ -179,13 +161,18 @@ def electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                     OB.append(a)
                     z = z + 1
                     l = l + 1
-                if l == 5 and i == 1 and z == 0:
-                    OA.append(a)
-                if l == 5 and i == 0 and z == 1:
-                    PE.append(a)
+        print('this is oooooooooooptttttti',l)
+        if l == 4:
+            OA.append(a)
 
-            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) >= Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) < Lambda:
-                l = l + 1
+    for a in wilaya:
+        i = 0
+        l = 0
+        # ['A', 'B', 'C', 'd', 'E']
+
+        for classe in Classes[:-1]:
+            l = l + 1
+            if crédibilité(a[0], classe, Criteres, Performances, Seuils, Poids) < Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) >= Lambda:
                 if classe == 'E' and i == 0:
                     PD.append(a)
                     i = i + 1
@@ -202,32 +189,10 @@ def electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda):
                     PA.append(a)
                     i = i + 1
                     l = l + 1
-                if l == 5:
-                    OA.append(a)
-            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) >= Lambda:
-                l = l + 1
-                if classe == 'E' and z == 0:
-                    OE.append(a)
-                    z = z + 1
-                    l = l + 1
-                if classe == 'D' and z == 0:
-                    OD.append(a)
-                    z = z + 1
-                    l = l + 1
-                if classe == 'C' and z == 0:
-                    OC.append(a)
-                    z = z + 1
-                    l = l + 1
-                if classe == 'B' and z == 0:
-                    OB.append(a)
-                    z = z + 1
-                    l = l + 1
-                if l == 5:
-                    PE.append(a)
-            elif crédibilité(a[0], classe,Criteres,Performances,Seuils,Poids) < Lambda and crédibilité2(classe, a[0],Criteres,Performances,Seuils,Poids) < Lambda:
-                continue
-
-    resulta = [PE, PD, PC, PB, PA, OE, OD, OC, OB, OA]
+        print('this is pppppppppppppppppppppesssssssssi', l)
+        if l == 4:
+            PA.append(a)
+    resulta = [OE, OD, OC, OB, OA,PE, PD, PC, PB, PA]
     return resulta
     
 
@@ -282,10 +247,8 @@ def launchElectre(request,id):
 
     Lambda = 0.75
 
-    for classe in Classes[:-1]:
-        resulta = electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda)
+    resulta = electretri(wilaya,Classes,Criteres,Performances,Seuils,Poids,Lambda)
 
-    print(len(resulta[4]))
     return render(request,'electre.html',
         {
             "resulta":resulta,
