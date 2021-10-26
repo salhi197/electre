@@ -201,22 +201,21 @@ def launchElectre(request,id):
     df = pd.read_excel(file.pic.file)
     Classes = ['E', 'D', 'C', 'B', 'A']
 
-
     lenclasses = len(Classes)
-    minus = lenclasses+3
+    minus = lenclasses + 3
     dimensions = df.shape
     nombrepdv=dimensions[0]-minus
-    Poids=(df.iloc[-1]).to_dict()
+
+    Poids = (df.iloc[-1]).to_dict()
     Poids.pop('Alternatives')
 
     Criteres = list(Poids.keys())
     Criteres.pop()
-
     first_column = (df.iloc[:, 0]).to_dict()
     values = first_column.values()
     values_list = list(values)
     Actions = []
-    for i in range(0,dimensions[0]-minus):
+    for i in range(0, dimensions[0] - minus):
         Actions.append(values_list[i])
 
     # pdv with wilaya
@@ -228,21 +227,21 @@ def launchElectre(request,id):
     for element1, element2 in zip_object:
         wilaya.append((element1, element2))
 
-    per = (df.iloc[:dimensions[0]-minus, 1:dimensions[1]-1]).to_dict('records')
-
+    # print(Actions)
+    per = (df.iloc[:dimensions[0] - minus, 1:dimensions[1] - 1]).to_dict('records')
     Performances = {}
-    for i in range(0,len(Actions)):
+    for i in range(0, len(Actions)):
         Performances[Actions[i]] = per[i]
+    seu = (df.iloc[dimensions[0] - minus:dimensions[0] - 1, 1:dimensions[1] - 1]).to_dict('split')
 
-    seu = (df.iloc[dimensions[0]-minus:dimensions[0]-1, 1:]).to_dict('split')
     p = lenclasses - 1
     q = lenclasses
     v = lenclasses + 1
     Seuils = {}
-    for n in range(0,minus-4):
+    for n in range(0, minus - 4):
         t = {}
-        for m in range(0,minus-3):
-            t[seu['columns'][m]] = [seu['data'][n][m],seu['data'][p][m],seu['data'][q][m],seu['data'][v][m]]
+        for m in range(0, minus - 3):
+            t[seu['columns'][m]] = [seu['data'][n][m], seu['data'][p][m], seu['data'][q][m], seu['data'][v][m]]
         Seuils[Classes[n]] = t
 
     Lambda = 0.75
